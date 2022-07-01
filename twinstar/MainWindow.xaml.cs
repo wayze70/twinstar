@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 
 namespace Twinstar
@@ -135,6 +136,8 @@ namespace Twinstar
 
             Driver.Navigate().GoToUrl("https://www.twinstar.cz/manager/Auction/Create.aspx");
 
+            Thread.Sleep(500);
+
             if (new FindBy(By.ClassName("tmessages_error")).GetElement().Displayed)
             {
                 Driver.Quit();
@@ -142,9 +145,9 @@ namespace Twinstar
                 return;
             }
 
-            new FindBy(By.XPath("/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[1]/td[3]/div/a[1]")).GetElement().Click();
+            new FindBy(By.XPath("/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[1]/td[3]/div/a[1]")).WaitForElementToBeClickable().Click();
             new FindBy(By.XPath($"//a[text() = '{character} (lvl 85)']")).WaitForElementToBeClickable().Click();
-            new FindBy(By.XPath("/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[2]/td[3]/div/a[1]")).GetElement().Click();
+            new FindBy(By.XPath("/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[2]/td[3]/div/a[1]")).WaitForElementToBeClickable().Click();
             new FindBy(By.XPath("//a[text() = 'Trade']")).WaitForElementToBeClickable().Click();
 
             for (int i = 0; i < collection.Count; i++)
@@ -169,9 +172,9 @@ namespace Twinstar
 
                 if (collection[i])
                 {
-                    new FindBy(By.XPath($"/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[4]/td[3]/div[{(o * 2) + 1}]/a[1]")).GetElement().Click();
+                    new FindBy(By.XPath($"/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[4]/td[3]/div[{(o * 2) + 1}]/a[1]")).WaitForElementToBeClickable().Click();
                     new FindBy(By.XPath($"//div[{(o * 2) + 1}]/ul/li/a[text() = '{RaceAll[u]}']")).WaitForElementToBeClickable().Click();
-                    new FindBy(By.XPath($"/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[4]/td[3]/div[{(o + 1) * 2}]/a[1]")).GetElement().Click();
+                    new FindBy(By.XPath($"/html/body/form/div[3]/div[2]/div[4]/div/div[2]/div[3]/div/table/tbody/tr[4]/td[3]/div[{(o + 1) * 2}]/a[1]")).WaitForElementToBeClickable().Click();
                     new FindBy(By.XPath($"//div[{(o + 1) * 2}]/ul/li/a[text() = '{selectedClasses[z]}']")).WaitForElementToBeClickable().Click();
 
                     o++;
